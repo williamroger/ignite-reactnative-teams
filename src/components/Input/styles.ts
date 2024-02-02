@@ -12,7 +12,7 @@ export const Container = styled(TextInput)`
     color: ${theme.COLORS.WHITE};
 
     font-family: ${theme.FONT_FAMILY.REGULAR};
-    color: ${theme.FONT_SIZE.MD}px;
+    font-size: ${theme.FONT_SIZE.MD}px;
   `}
 
   border-radius: 6px;
