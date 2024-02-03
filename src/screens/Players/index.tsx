@@ -6,8 +6,11 @@ import { Highlight } from '@components/Highlight';
 import { ButtonIcon } from '@components/ButtonIcon';
 import { Input } from '@components/Input';
 import { Filter } from '@components/Filter';
+import { PlayerCard } from '@components/PlayerCard';
 
 import { Container, Form, HeaderList, NumbersOfPlayers } from './styles';
+import { ListEmpty } from '@components/ListEmpty';
+import { Button } from '@components/Button';
 
 export function Players() {
   const [team, setTeam] = useState('Time A');
@@ -45,6 +48,23 @@ export function Players() {
           {players.length}
         </NumbersOfPlayers>
       </HeaderList>
+      
+      <FlatList 
+        data={players}
+        keyExtractor={item => item}
+        renderItem={({item}) => (
+          <PlayerCard name={item} onRemove={() => console.log('remove...')} />
+        )}
+        ListEmptyComponent={() => (
+          <ListEmpty
+            message="Não há participantes neste time."
+          />
+        )}
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={[{ paddingBottom: 100 }, !players.length && { flex: 1 }]}
+      />
+
+      <Button title="Remover Turma" type="SECONDARY" />
     </Container>
   )
 }
