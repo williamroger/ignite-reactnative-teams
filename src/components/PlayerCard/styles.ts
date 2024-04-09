@@ -17,7 +17,7 @@ export const Container = styled.View`
 export const Name = styled.Text`
   flex: 1;
   ${({ theme }) => css`
-    font-size: ${theme.FONT_SIZE.MD};
+    font-size: ${theme.FONT_SIZE.MD}px;
     color: ${theme.COLORS.GRAY_200};
     font-family: ${theme.FONT_FAMILY.REGULAR};
   `}
