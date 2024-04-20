@@ -7,6 +7,7 @@ import { AppError } from '@utils/AppError';
 import { playerAddByGroup } from '@storage/player/playerAddByGroup';
 import { playersGetByGroupAndTeam } from '@storage/player/playersGetByGroupAndTeam';
 import { PlayerStorageDTO } from '@storage/player/PlayerStorageDTO';
+import { playerRemoveByGroup } from '@storage/player/playerRemoveByGroup';
 
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
@@ -68,6 +69,17 @@ export function Players() {
     }
   }
 
+  async function handlePlayerRemove(playerName: string) {
+    try {
+      await playerRemoveByGroup(playerName, group);
+      fecthPlayersByTeam();
+
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Remover jogador', 'Não foi possível remover esse jogador.');
+    }
+  }
+
   useEffect(() => {
     fecthPlayersByTeam();
   }, [team]);
@@ -120,7 +132,10 @@ export function Players() {
         data={players}
         keyExtractor={item => item.name}
         renderItem={({item}) => (
-          <PlayerCard name={item.name} onRemove={() => console.log('remove...')} />
+          <PlayerCard 
+            name={item.name} 
+            onRemove={() => handlePlayerRemove(item.name)} 
+          />
         )}
         ListEmptyComponent={() => (
           <ListEmpty
